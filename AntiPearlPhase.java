@@ -38,20 +38,19 @@ public class AntiPearlPhase extends JavaPlugin implements Listener {
     private boolean isDestinationSafe(Location from, Location to) {
         double distance = from.distance(to);
         if (distance > 1) {
-            return false; // Nếu khoảng cách lớn hơn 1 block, không an toàn
+            return false;
         }
 
-        // Kiểm tra xem có bức tường nào xung quanh không
         for (BlockFace face : BlockFace.values()) {
             if (face == BlockFace.DOWN || face == BlockFace.UP) {
-                continue; // Bỏ qua kiểm tra trên và dưới
+                continue;
             }
             Location adjacent = to.clone().add(face.getModX(), 0, face.getModZ());
             if (adjacent.getBlock().getType() != Material.AIR) {
-                return true; // Nếu có ít nhất một bức tường xung quanh, không an toàn
+                return true;
             }
         }
 
-        return false; // Nếu không có bức tường xung quanh, không an toàn
+        return false;
     }
 }
